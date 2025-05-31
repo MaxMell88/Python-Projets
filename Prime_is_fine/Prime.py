@@ -30,7 +30,7 @@ def is_prime_trial_division(num: int) -> bool:
     while i * i <= num:
         if num % i == 0 or num % (i + 2) == 0:
             return False
-    i += 6
+        i += 6
     return True
 # --- Algoritmus 2: Sieve of Eratosthenes (Eratosthenovo síto) ---
 # Tento algoritmus je mnohem efektivnější pro nalezení VŠECH prvočísel
@@ -41,9 +41,9 @@ def sieve_of_eratosthenes(limit: int) -> list[int]:
 #Nalezne všechna prvočísla až do zadaného limitu pomocí
 #Eratosthenova síta.
 
- if limit < 2:
+    if limit < 2:
 
-    return []
+        return []
 # Vytvoří boolean seznam 'is_prime', kde is_prime[i] je True,pokud je i prvočíslo
     is_prime = [True] * (limit + 1)
     is_prime[0] = False # 0 není prvočíslo
@@ -58,44 +58,46 @@ def sieve_of_eratosthenes(limit: int) -> list[int]:
          for multiple in range(p * p, limit + 1, p):
 
             is_prime[multiple] = False
-    p += 1 # Posun na další číslo
+            p += 1 # Posun na další číslo
 # Shromáždíme všechna prvočísla
     primes = [num for num, prime_status in enumerate(is_prime) if prime_status]
     return primes
 
 
 # --- Hlavní část pro spuštění a porovnání ---
-    if __name__ == "__main__":
+if __name__ == "__main__":
         print("--- Porovnání algoritmů pro prvočísla ---")
 # Příklad 1: Testování jednoho velkého čísla pomocí Trial Division
 # Toto je scénář, pro který je Trial Division relativně rychlá.
-    test_number_single = 15_485_863 # Tvé nalezené prvočíslo
-    print(f"\nTestování prvočíselnosti jednoho čísla({test_number_single}) pomocí Trial Division:")
-    is_prime_result, duration_single_td =measure_time(is_prime_trial_division, test_number_single)
-    print(f"Je {test_number_single} prvočíslo? {is_prime_result}")
-    print(f"Trvalo to: {duration_single_td:.6f} sekund.")
+test_number_single = 15_485_863 # Tvé nalezené prvočíslo
+print(f"\nTestování prvočíselnosti jednoho čísla({test_number_single}) pomocí Trial Division:")
+is_prime_result, duration_single_td =measure_time(is_prime_trial_division, test_number_single)
+print(f"Je {test_number_single} prvočíslo? {is_prime_result}")
+print(f"Trvalo to: {duration_single_td:.6f} sekund.")
 
 # Očekávaný výsledek: velmi rychlé (zlomky milisekundy).
 # Příklad 2: Nalezení VŠECH prvočísel do určitého limitu pomocí Eratosthenova síta
 # Toto je scénář, pro který je Síto navrženo a je extrémně efektivní.
-    limit_sieve = 15_485_863 # Tvůj limit, pro který jsi měl/a dlouhývýpočet
-    print(f"\nNalezení VŠECH prvočísel do {limit_sieve} pomocí Eratosthenova síta:")
-    primes_found_sieve, duration_sieve =measure_time(sieve_of_eratosthenes, limit_sieve)
-    print(f"Nalezeno {len(primes_found_sieve)} prvočísel.")
-    print(f"Trvalo to: {duration_sieve:.6f} sekund.")
+limit_sieve = 15_485_863 # Tvůj limit, pro který jsi měl/a dlouhývýpočet
+print(f"\nNalezení VŠECH prvočísel do {limit_sieve} pomocí Eratosthenova síta:")
+primes_found_sieve, duration_sieve =measure_time(sieve_of_eratosthenes, limit_sieve)
+print(f"Nalezeno {len(primes_found_sieve)} prvočísel.")
+print(f"Trvalo to: {duration_sieve:.6f} sekund.")
 # Očekávaný výsledek: Čas by měl být podobný tvému původnímu 137sekundám,
 # protože síto efektivně dělá to, co tvůj původní kód dělalneefektivně.
 # Příklad 3: Porovnání Trial Division pro rozsah (jen pro menšílimit, protože je pomalé)
 # Zde uvidíš, proč se Trial Division nepoužívá pro nalezení všechprvočísel v rozsahu.
-    limit_small_range_td = 100_000
-    print(f"\nNalezení VŠECH prvočísel do {limit_small_range_td} pomocí opakované Trial Division:")
-    primes_found_td_range = []
-    start_time_td_range = time.perf_counter()
-    for num in range(2, limit_small_range_td + 1):
+limit_small_range_td = 100_000
+print(f"\nNalezení VŠECH prvočísel do {limit_small_range_td} pomocí opakované Trial Division:")
+primes_found_td_range = []
+start_time_td_range = time.perf_counter()
+end_time_td_range   = time.perf_counter()
+duration_td_range   = time.perf_counter()
+for num in range(2, limit_small_range_td + 1):
         if is_prime_trial_division(num):
             primes_found_td_range.append(num)
-    end_time_td_range = end_time_td_range - start_time_td_range
-    print(f"Nalezeno {len(primes_found_td_range)} prvočísel.")
-    print(f"Trvalo to: {duration_td_range:.6f} sekund.")
+end_time_td_range = end_time_td_range - start_time_td_range
+print(f"Nalezeno {len(primes_found_td_range)} prvočísel.")
+print(f"Trvalo to: {duration_td_range:.6f} sekund.")
 # Očekávaný výsledek: I pro 100 000 je to znatelně pomalejší nežSíto pro 15 milionů.
 # Kód pro 15 milionů by zde trval hodiny/dny, proto honespouštíme
