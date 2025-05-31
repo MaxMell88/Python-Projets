@@ -1,18 +1,20 @@
 import time
+import math
 
 
 def NextPrime( _pole:list,_index):
     #print("next",_pole)
     _prime=_pole[_index]+2
     _i=0
+    _primeroot=math.sqrt(_prime)
     while (_i<=_index):
         if(_prime % _pole[_i]==0):
             _i=0
             _prime=_prime+2          
-            
+            _primeroot=math.sqrt(_prime)
             
         if(_i>=1): 
-            if((_pole[_i]*_pole[_i])>_prime):
+            if(_pole[_i]>_primeroot):
                 return _prime
         _i=_i+1        
      
@@ -28,7 +30,7 @@ Prime=[]
 Prime.append(2)
 Prime.append(3)
 
-print (Prime[0],Prime[1])
+
 for i in range(n-2):
     Prime.append(0)
 for i in range(n):
