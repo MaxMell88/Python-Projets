@@ -43,6 +43,10 @@ class PrimeGenerator:
 
         if not self._is_sieve_run:
             self._run_sive()
+        if len(self._primes) -1 > n:
+             return False
+        else:
+             return self._primes[n-1]
 
 
     def _is_prime(self, _test_num ) -> bool:
