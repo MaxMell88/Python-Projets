@@ -1,15 +1,10 @@
 # Import the PrimeGenerator class from its module
-from PrimeGenerator import PrimeGenerator
-import math
-import time
-
-
+from PrimeGenerator.PrimeGenerator import PrimeGenerator
 
 # Import the measure_time function from the Funkce module
-from funkce import measure_time
+from Funkce import measure_time
 
-    
-if __name__ == "__main__":
+if _name_ == "_main_":
     print("--- Testing PrimeGenerator Functionality ---")
 
     # --- Test 1: Basic Initialization and Generation ---
@@ -25,7 +20,7 @@ if __name__ == "__main__":
         print(f"Caught expected error: {e}")
 
     print(f"\nGenerating sieve for limit {prime_gen.get_limit()}...")
-    _, duration_gen = measure_time(prime_gen._run_sive)
+    _, duration_gen = measure_time(prime_gen.generate_sieve)
     print(f"Sieve generation completed in {duration_gen:.6f} seconds.")
     print(f"Number of primes found: {len(prime_gen.get_primes())}")
 
@@ -42,17 +37,17 @@ if __name__ == "__main__":
     test_num_out_of_range = 20_000_000
 
     print(f"\nChecking primality of {test_num_prime}:")
-    is_prime_res, duration_is_prime = measure_time(prime_gen._is_prime, test_num_prime)
+    is_prime_res, duration_is_prime = measure_time(prime_gen.is_prime, test_num_prime)
     print(f"Is {test_num_prime} prime? {is_prime_res}")
     print(f"Operation took {duration_is_prime:.6f} seconds.")
 
     print(f"\nChecking primality of {test_num_not_prime}:")
-    is_prime_res_2, duration_is_prime_2 = measure_time(prime_gen._is_prime,test_num_not_prime)
+    is_prime_res_2, duration_is_prime_2 = measure_time(prime_gen.is_prime, test_num_not_prime)
     print(f"Is {test_num_not_prime} prime? {is_prime_res_2}")
     print(f"Operation took {duration_is_prime_2:.6f} seconds.")
 
     print(f"\nChecking primality of {test_num_out_of_range} (out of limit):")
-    is_prime_res_3, duration_is_prime_3 = measure_time(prime_gen._is_prime, test_num_not_prime)
+    is_prime_res_3, duration_is_prime_3 = measure_time(prime_gen.is_prime, test_num_out_of_range)
     print(f"Is {test_num_out_of_range} prime? {is_prime_res_3}")
     print(f"Operation took {duration_is_prime_3:.6f} seconds.")
 
@@ -69,9 +64,8 @@ if __name__ == "__main__":
         print(f"Caught expected error: {e}")
 
     print(f"\nGenerating sieve for new limit {prime_gen.get_limit()}...")
-    _, duration_regen = measure_time(prime_gen._run_sive)
+    _, duration_regen = measure_time(prime_gen.generate_sieve)
     print(f"Sieve regeneration completed in {duration_regen:.6f} seconds.")
     print(f"Number of primes found: {len(prime_gen.get_primes())}")
-    
 
-    print("\n--- All tests completed ---")
+    print("\n--- All tests completed ---")

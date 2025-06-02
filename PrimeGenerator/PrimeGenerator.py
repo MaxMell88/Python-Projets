@@ -3,10 +3,13 @@ import time
 
 
 class PrimeGenerator:
+    DEF_LIMIT = 15485863 # Výchozi honota pro 1000,000te prvočíslo 
+    ACT_LIMIT=DEF_LIMIT
+    
+
+
     def __init__(self, limit: int):
 
-        if not isinstance(limit, int) or limit <2:
-            raise ValueError("Limit musí byt celé čislo větší než 2")
 
         self.limit= limit           #limit vyhledávání
         self._primes = []           #pole prvočisel
@@ -15,11 +18,8 @@ class PrimeGenerator:
 
 
     def _run_sive(self):
-        if self._is_sieve_run:
-            print("Sito již běželo")
-            return
-        print("Start pro limit", self.limit)
-        _is_prime_array= [True] * (self.limit + 1)
+        
+        _is_prime_array = [True] * (self.limit + 1)
         _is_prime_array[0]=False
         _is_prime_array[1]=False
 
@@ -37,7 +37,6 @@ class PrimeGenerator:
         self._primes = [num for num, prime_status in enumerate(_is_prime_array)  if prime_status] # přepis prvočisel do interního seznamu
 
         self._is_sieve_run=True
-        print("Sito dokončeno! Nalezeno:",len(self._primes),"prvočisel \n nejvetší nalezene prvočíslo je:", self._primes[(len(self._primes)-1)])
         return self._primes
     
     def get_nth_prime(self, n : int):
@@ -45,25 +44,28 @@ class PrimeGenerator:
         if not self._is_sieve_run:
             self._run_sive()
 
-        if n<=0:
-            raise ValueError("index musí byt větší než 0")
-        if n- 1 < len(self._primes):
 
-            return self._primes[n-1]
-        else:
-            print("Limit neni dostatečně velky proé nalezeni Nteho prvočisla")
-            return None
+    def _is_prime(self, _test_num ) -> bool:
+           if _test_num in self._primes :
+               return True
+           else:
+               return False
+           
 
-    def _is_prime(self, num : int) -> bool:
-        if not self._is_sieve_run:
-            self._run_sive()
-        if num <0 or num > self.limit:
-            return False    
+    def get_primes (self) -> list[int]:
+        return self._primes
+    
+    def set_limit(self,  _newlmit) ->bool:
+        
+            self.ACT_LIMIT=_newlmit
+        
+          
+    def get_limit(self) -> int:
 
-def measure_time(func, *args, **kwargs):
+        return self.ACT_LIMIT
+    
+    
+        
+        
 
-    start_time = time.perf_counter()
-    result = func(*args, **kwargs)
-    end_time = time.perf_counter()
-    duration = end_time - start_time
-    return result, duration
+
