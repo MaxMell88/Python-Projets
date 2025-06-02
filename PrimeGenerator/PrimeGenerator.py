@@ -8,10 +8,10 @@ class PrimeGenerator:
     
 
 
-    def __init__(self, limit: int):
+    def __init__(self):
 
 
-        self.limit= limit           #limit vyhledávání
+        self.limit= self.DEF_LIMIT           #limit vyhledávání
         self._primes = []           #pole prvočisel
         self._is_sieve_run=False    #Flag_ bylo již spoštěno?
 
@@ -43,7 +43,7 @@ class PrimeGenerator:
 
         if not self._is_sieve_run:
             self._run_sive()
-        if len(self._primes) -1 > n:
+        if (len(self._primes) +1) < n:
              return False
         else:
              return self._primes[n-1]
@@ -61,7 +61,8 @@ class PrimeGenerator:
     
     def set_limit(self,  _newlmit) ->bool:
         
-            self.ACT_LIMIT=_newlmit
+           self.limit=_newlmit
+           self.ACT_LIMIT=_newlmit
         
           
     def get_limit(self) -> int:
