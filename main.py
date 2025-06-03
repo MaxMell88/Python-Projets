@@ -1,13 +1,15 @@
 # Import the PrimeGenerator class from its module
-from PrimeGenerator import PrimeGenerator
+
+
 import math
 import time
 
+from prime_sieve.PrimeGenerator import PrimeGenerator
 
-
+test=PrimeGenerator()
 # Import the measure_time function from the Funkce module
 from funkce import measure_time
-from user_interface import User_interface
+from UI.user_interface import User_interface
 
 app=User_interface()
 

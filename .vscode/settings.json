@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./prime_sieve",
+        "./UI"
+    ]
+}

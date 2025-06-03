@@ -16,7 +16,7 @@ from User_interface import User_interface
 
 import keyboard
 
-from PrimeGenerator import PrimeGenerator
+from prime_sieve.PrimeGenerator import PrimeGenerator
 from funkce import measure_time
 
 class User_interface:
@@ -126,7 +126,12 @@ class User_interface:
             self.display_main_menu()
             choise=self._get_integer_input("=--- Vaše volba?:\n")
             if choise==1:
-                self.prime_generator._run_sive()
+                _, run_sief_duration = measure_time(self.prime_generator._run_sive)
+                print("=--- Prvočisla připravene s limitem:",self.prime_generator.get_limit(),"\n=--- Trvalo to ",run_sief_duration,"sekund")
+                print(f"=---Nejvetší nalezené prvočíslo je:",self.prime_generator._primes[len(self.prime_generator._primes)-1])
+                print(f"=--- Celekem bylo nalezono {len(self.prime_generator._primes)} prvočísel")
+                print("\n"+"="*100)
+                
             
             elif choise == 2:
                 self.setup_generator_limit()
