@@ -5,15 +5,14 @@ import math
 import time
 
 from prime_sieve.PrimeGenerator import PrimeGenerator
-
-test=PrimeGenerator()
-# Import the measure_time function from the Funkce module
 from funkce import measure_time
-from UI.user_interface import User_interface
+from UI.user_interface import User_interface2
+# Import the measure_time function from the Funkce module
 
-app=User_interface()
 
 
 
 if __name__ == "__main__":
-    app.run()  
+    app=User_interface2()
+
+    app.run()
